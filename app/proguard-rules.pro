@@ -17,9 +17,10 @@
 #}
 # rx
 -dontwarn rx.**
+-keep class rx.**{*;}
 -keepclassmembers class rx.** { *; }
 
-# -keep class me.zsj.moment.**{*;}
+-keep class me.zsj.moment.**{*;}
 -keepclasseswithmembernames class * {
     native <methods>;
 }
@@ -37,6 +38,10 @@ public static final int *;
 -dontwarn okio.**
 -keep interface com.squareup.okhttp3.** { *; }
 -dontwarn com.squareup.okhttp3.**
+
+#jsoup
+-keep class org.jsoup.** {*;}
+-keepclassmembers class rx.** { *; }
 
 # bughd
 -keepattributes Exceptions, Signature, LineNumberTable
