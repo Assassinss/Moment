@@ -19,6 +19,11 @@
 -dontwarn rx.**
 -keepclassmembers class rx.** { *; }
 
+# -keep class me.zsj.moment.**{*;}
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
 -keep public class me.zsj.moment.R$*{
 public static final int *;
 }
@@ -32,3 +37,8 @@ public static final int *;
 -dontwarn okio.**
 -keep interface com.squareup.okhttp3.** { *; }
 -dontwarn com.squareup.okhttp3.**
+
+# bughd
+-keepattributes Exceptions, Signature, LineNumberTable
+
+-dontwarn java.lang.invoke**
