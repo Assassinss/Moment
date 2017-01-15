@@ -1,5 +1,5 @@
 #Moment
-A collection of high-resolution wallpaper app.
+A wallpaper app that collects high-resolution photographic photos.
 
 ##APK Download
 http://www.coolapk.com/apk/me.zsj.moment
