@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name">Moment</string>
+    <string name="app_name_debug">Moment(debug)</string>
 
     <string name="picture_host">http://www.ssyer.com%s</string>
     <string name="new_picture_url">http://www.ssyer.com/index_page_%d.html</string>

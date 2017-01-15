@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<me.zsj.moment.widget.InsetsFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/picture_container"
@@ -73,4 +73,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</me.zsj.moment.widget.InsetsFrameLayout>

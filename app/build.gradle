@@ -23,6 +23,7 @@ android {
         debug {
             debuggable true
             applicationIdSuffix ".debug"
+            addManifestPlaceholders APP_NAME: '@string/app_name_debug'
         }
 
         release {

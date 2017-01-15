@@ -125,12 +125,33 @@ public class PictureActivity extends RxAppCompatActivity
 
     }
 
+    private static final int FLAG_HIDE_SYSTEM_UI = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+            | View.SYSTEM_UI_FLAG_IMMERSIVE;
+
+    private static final int FLAG_SHOW_SYSTEM_UI = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+
+
+    private void hideSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(FLAG_HIDE_SYSTEM_UI);
+    }
+
+    private void showSystemUI() {
+        getWindow().getDecorView().setSystemUiVisibility(FLAG_SHOW_SYSTEM_UI);
+    }
+
     @Override
     public void onSingleTap() {
         if (picInfoContainer.getVisibility() == View.VISIBLE) {
             AnimUtils.hidePicInfo(picInfoContainer);
+            hideSystemUI();
         } else {
             AnimUtils.showPicInfo(picInfoContainer);
+            showSystemUI();
         }
     }
 
