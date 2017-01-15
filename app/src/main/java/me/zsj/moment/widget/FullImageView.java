@@ -27,6 +27,7 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
 
     private int screenWidth;
     private int screenHeight;
+    private int viewRealWidth;
 
     private OnSingleTapListener onSingleTapListener;
 
@@ -73,7 +74,7 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
             int height = background.getIntrinsicHeight();
 
             float ratio = (float) screenHeight / (float) height;
-            int viewRealWidth = (int) (width * ratio);
+            viewRealWidth = (int) (width * ratio);
 
             imageBound.set(0, 0, viewRealWidth, screenHeight);
             imageMatrix.postScale(ratio, ratio);
@@ -90,7 +91,9 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2,
                                     float distanceX, float distanceY) {
-                FullImageView.this.onScroll(distanceX);
+                if (viewRealWidth > screenWidth) {
+                    FullImageView.this.onScroll(distanceX);
+                }
                 return super.onScroll(e1, e2, distanceX, distanceY);
             }
 

@@ -41,11 +41,12 @@ public class InsetsFrameLayout extends FrameLayout implements View.OnApplyWindow
     @Override
     public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
         int b = insets.getSystemWindowInsetBottom();
+        int r = insets.getSystemWindowInsetRight();
 
         pictureInfoLayout.setPadding(
                 pictureInfoLayout.getPaddingLeft(),
                 pictureInfoLayout.getPaddingTop(),
-                pictureInfoLayout.getPaddingRight(),
+                pictureInfoLayout.getPaddingRight() + r,
                 pictureInfoLayout.getPaddingBottom() + b);
 
         setOnApplyWindowInsetsListener(null);
