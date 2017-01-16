@@ -31,6 +31,8 @@ public class RxDownload {
                             .get());
                 } catch (InterruptedException | ExecutionException e) {
                     subscriber.onError(e);
+                } finally {
+                    subscriber.onCompleted();
                 }
             }
         }).subscribeOn(Schedulers.io())
