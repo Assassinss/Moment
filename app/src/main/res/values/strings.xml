@@ -15,15 +15,8 @@
     <string name="about">关于</string>
     <string name="source_code">源码</string>
     <string name="open_source_library">开源库</string>
-
-    <array name="open_source_libraries_list">
-        <item>jhy / jsoup</item>
-        <item>ReactiveX / RxAndroid</item>
-        <item>trello / RxLifecycle</item>
-        <item>tbruyelle / RxPermissions</item>
-        <item>bumptech / Glide</item>
-        <item>square / okhttp</item>
-    </array>
+    <string name="about_app">高清摄影图片壁纸应用</string>
+    <string name="contacts_me">联系我</string>
 
     <string name="refresh">最新</string>
     <array name="filters">
