@@ -43,6 +43,11 @@ public static final int *;
 -keep class org.jsoup.** {*;}
 -keepclassmembers class rx.** { *; }
 
+#umeng
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
 # bughd
 -keepattributes Exceptions, Signature, LineNumberTable
 
