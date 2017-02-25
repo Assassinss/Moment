@@ -1,138 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#99000000"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <me.zsj.moment.widget.FontsTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white"
+        android:textSize="72sp"
+        android:textStyle="bold"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/LightToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:title="@string/about"/>
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        tools:text="v 1.1.1"/>
 
-        <ImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="48dp"
-            android:src="@drawable/web_hi_res_512"
-            tools:ignore="ContentDescription"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="@string/about_app"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center"
-            android:text="@string/about_app"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
+    <TextView
+        android:id="@+id/source_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:lineSpacingMultiplier="1.5"
+        android:textColor="#afff"
+        android:textColorLink="@android:color/white"
+        tools:text="source code"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/list_bg"/>
+    <TextView
+        android:id="@+id/open_source"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:lineSpacingMultiplier="1.5"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:textColor="#afff"
+        android:textColorLink="@android:color/white"
+        tools:text="moment moment moment m"/>
 
-        <TextView
-            android:id="@+id/version"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:foreground="?selectableItemBackground"
-            android:padding="16dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            tools:text="Version 2.0.0"/>
-
-        <LinearLayout
-            android:id="@+id/github"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?selectableItemBackground"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_github"
-                tools:ignore="ContentDescription"/>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:text="GITHUB"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/contacts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?selectableItemBackground"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_email"
-                tools:ignore="ContentDescription"/>
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:text="@string/contacts_me"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/source_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:foreground="?selectableItemBackground"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_link"
-                tools:ignore="ContentDescription"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                android:text="@string/source_code"
-                android:textStyle="bold"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

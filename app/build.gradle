@@ -86,5 +86,7 @@ dependencies {
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.7.0@aar'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile files('libs/jsoup-1.8.2.jar')
+    compile 'com.google.android.apps.muzei:muzei-api:+'
+    compile 'com.github.GrenderG:Toasty:1.1.3'
     compile 'com.umeng.analytics:analytics:latest.integration'
 }

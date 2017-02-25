@@ -26,14 +26,15 @@
         android:background="@color/end_alpha_gb"
         android:orientation="vertical">
 
-        <TextView
+        <me.zsj.moment.widget.FontsTextView
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16sp"
             android:textColor="@android:color/white"
-            android:textStyle="italic"
-            tools:text="来自：xxxxxx"/>
+            android:textStyle="bold"
+            android:textSize="32sp"
+            tools:text="Photo by xxxxxx"/>
 
         <ImageView
             android:id="@+id/avatar"

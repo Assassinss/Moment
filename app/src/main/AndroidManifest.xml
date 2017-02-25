@@ -4,9 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- Required by RemoteMuzeiArtSource -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:name=".MomentApplication"
@@ -24,6 +26,30 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL}"/>
 
+        <service
+            android:name=".muzei.MomentArtSource"
+            android:icon="@drawable/ic_logo_24px"
+            android:label="Moment">
+
+            <intent-filter>
+                <action android:name="com.google.android.apps.muzei.api.MuzeiArtSource"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="settingsActivity"
+                android:value="me.zsj.moment.MomentMuzeiSettings"/>
+
+            <meta-data
+                android:name="color"
+                android:value="#4db6ac"/>
+
+        </service>
+
+        <activity
+            android:name=".MomentMuzeiSettings"
+            android:parentActivityName="com.google.android.apps.muzei.settings.SettingsActivity"
+            android:exported="true"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -36,11 +62,13 @@
             android:name=".PictureActivity"
             android:theme="@style/AppTheme.PictureDetail"/>
 
-        <activity android:name=".AboutActivity" />
-        
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/AppTheme.Translucent"/>
+
         <provider
-            android:authorities="${applicationId}.picture"
             android:name=".PictureFileProvider"
+            android:authorities="${applicationId}.picture"
             android:exported="false"
             android:grantUriPermissions="true">
 

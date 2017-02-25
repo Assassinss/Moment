@@ -7,6 +7,9 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import me.zsj.moment.utils.NetUtils;
+import me.zsj.moment.utils.PreferenceManager;
+
 import static org.junit.Assert.*;
 
 /**
@@ -22,5 +25,18 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("me.zsj.moment", appContext.getPackageName());
+    }
+
+    @Test
+    public void isWifiConnected() throws Exception {
+
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        boolean isWifi = PreferenceManager.getBooleanValue(context, "isWifi");
+
+        boolean connect = (isWifi && NetUtils.isWifiConnected(context)) ||
+                !isWifi && NetUtils.checkNet(context);
+
+        assertEquals(true, connect);
     }
 }

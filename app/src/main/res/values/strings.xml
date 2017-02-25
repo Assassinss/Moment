@@ -6,36 +6,35 @@
     <string name="picture_host">http://www.ssyer.com%s</string>
     <string name="new_picture_url">http://www.ssyer.com/index_page_%d.html</string>
     <string name="pic_category_url" formatted="false">http://ssyer.com/index_l_%d_page_%d.html</string>
-    <string name="author">来自：%s</string>
-    <string name="set_wallpaper">设为壁纸</string>
-    <string name="save_picture">保存图片</string>
-    <string name="permission_required">保存图片需要写入权限</string>
-    <string name="save_path_tips">图片已保存到%s</string>
+    <string name="author">Photo by %s</string>
+    <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="save_picture">Save Photo</string>
+    <string name="permission_required">Write permission is required for saving photo</string>
+    <string name="save_path_tips">Save photo to %s</string>
     <string name="loading_text">Download&#8230;</string>
-    <string name="about">关于</string>
-    <string name="source_code">源码</string>
-    <string name="open_source_library">开源库</string>
-    <string name="about_app">高清摄影图片壁纸应用</string>
-    <string name="contacts_me">联系我</string>
+    <string name="about">About Moment</string>
+    <string name="about_app">High-Resolution wallpaper app</string>
+    <string name="refresh_text">Refresh every %d hour</string>
 
-    <string name="refresh">最新</string>
-    <array name="filters">
-        <item>最新</item>
-        <item>风景</item>
-        <item>人文</item>
-        <item>目的地/地标</item>
-        <item>博物馆/建筑</item>
-        <item>动物</item>
-        <item>植物/花</item>
-        <item>光线</item>
-        <item>水</item>
-        <item>商业</item>
-        <item>音乐</item>
-        <item>美食</item>
-        <item>传统</item>
-        <item>户外</item>
-        <item>模特/服饰</item>
-        <item>创意</item>
-    </array>
+    <string name="source_code">
+        <![CDATA[
+            Source Code:<br>
+            &bull; <b><a href="https://github.com/Assassinss/Moment">Moment</a></b> by Assassinss<br>
+        ]]>
+    </string>
+
+    <string name="open_source_used">
+        <![CDATA[
+        Many thanks to these open source projects:<br>
+        &bull; <b><a href="https://github.com/romannurik/muzei">muzei</a></b> by romannurik<br>
+        &bull; <b><a href="http://square.github.io/okhttp/">OkHttp</a></b> by Square<br>
+        &bull; <b><a href="https://github.com/bumptech/glide">glide</a></b> by bumptech<br>
+        &bull; <b><a href="https://github.com/ReactiveX/RxAndroid">RxAndroid</a></b> by ReactiveX<br>
+        &bull; <b><a href="https://github.com/ReactiveX/RxJava">RxJava</a></b> by ReactiveX<br>
+        &bull; <b><a href="https://github.com/trello/RxLifecycle">RxLifecycle</a> by trello<br>
+        &bull; <b><a href="https://github.com/tbruyelle/RxPermissions">RxPermissions</a></b> by tbruyelle<br>
+        &bull; <b><a href="https://github.com/jhy/jsoup">jsoup</a></b> by jhy<br>
+    ]]>
+    </string>
 
 </resources>

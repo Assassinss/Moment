@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -18,7 +16,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.util.List;
 
 import me.zsj.moment.model.Picture;
-import me.zsj.moment.utils.CircleTransform;
 import me.zsj.moment.widget.RatioImageView;
 
 import static me.zsj.moment.R.id.picture;
@@ -58,7 +55,7 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else if (getItemViewType(position) == R.layout.item_picture) {
             Holder holder = (Holder) viewHolder;
             Picture picture = pictures.get(position);
-            holder.image.setOriginalSize(16, 9);
+            holder.image.setOriginalSize(5, 5);
             Context context = holder.image.getContext();
 
             Glide.with(context)
@@ -66,14 +63,6 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .priority(Priority.HIGH)
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(holder.image);
-
-            Glide.with(context)
-                    .load(context.getString(R.string.picture_host, picture.avatarCover))
-                    .priority(Priority.NORMAL)
-                    .transform(new CircleTransform(context))
-                    .into(holder.avatar);
-
-            holder.author.setText(picture.avatar);
 
             holder.card.setOnClickListener(v -> {
                 Intent intent = new Intent(context, PictureActivity.class);
@@ -103,15 +92,11 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         FrameLayout card;
         RatioImageView image;
-        ImageView avatar;
-        TextView author;
 
         public Holder(View itemView) {
             super(itemView);
             card = (FrameLayout) itemView.findViewById(R.id.card_layout);
             image = (RatioImageView) itemView.findViewById(picture);
-            avatar = (ImageView) itemView.findViewById(R.id.avatar);
-            author = (TextView) itemView.findViewById(R.id.author);
         }
     }
 

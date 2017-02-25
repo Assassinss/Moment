@@ -7,7 +7,6 @@ import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -31,12 +30,14 @@ import com.umeng.analytics.MobclickAgent;
 import java.io.File;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
 import me.zsj.moment.model.Picture;
 import me.zsj.moment.rx.RxDownload;
 import me.zsj.moment.rx.RxFile;
 import me.zsj.moment.utils.AnimUtils;
 import me.zsj.moment.utils.CircleTransform;
 import me.zsj.moment.utils.TextureSizeUtils;
+import me.zsj.moment.widget.FontsTextView;
 import me.zsj.moment.widget.FullImageView;
 import rx.Observable;
 
@@ -80,8 +81,9 @@ public class PictureActivity extends RxAppCompatActivity
         loading = (ProgressBar) findViewById(R.id.loading);
         loadingText = (TextView) findViewById(R.id.loading_text);
 
-        TextView author = (TextView) findViewById(R.id.author);
+        FontsTextView author = (FontsTextView) findViewById(R.id.author);
         author.setText(getString(R.string.author, picture.avatar));
+
         ImageView avatar = (ImageView) findViewById(R.id.avatar);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         FullImageView fullImageView = (FullImageView) findViewById(R.id.full_picture);
@@ -166,7 +168,8 @@ public class PictureActivity extends RxAppCompatActivity
                         loadingText.setVisibility(View.VISIBLE);
                         return true;
                     } else {
-                        showTips(R.string.permission_required);
+                        Toasty.info(this, getString(R.string.permission_required),
+                                Toast.LENGTH_LONG).show();
                         return false;
                     }
                 })
@@ -194,7 +197,8 @@ public class PictureActivity extends RxAppCompatActivity
                         loadingText.setVisibility(View.VISIBLE);
                         return true;
                     } else {
-                        showTips(R.string.permission_required);
+                        Toasty.info(this, getString(R.string.permission_required),
+                                Toast.LENGTH_LONG).show();
                         return false;
                     }
                 })
@@ -234,12 +238,8 @@ public class PictureActivity extends RxAppCompatActivity
                 Environment.getExternalStorageDirectory(), directory));
     }
 
-    private void showTips(@StringRes int resId) {
-        Toast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
-    }
-
     private void showTips(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        Toasty.success(this, text, Toast.LENGTH_LONG).show();
     }
 
     @Override
