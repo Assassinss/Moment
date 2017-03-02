@@ -3,9 +3,9 @@ package me.zsj.moment.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import me.zsj.moment.R;
 
@@ -15,7 +15,7 @@ import me.zsj.moment.R;
 
 public class InsetsFrameLayout extends FrameLayout implements View.OnApplyWindowInsetsListener {
 
-    private LinearLayout pictureInfoLayout;
+    private ViewGroup pictureInfoLayout;
 
 
     public InsetsFrameLayout(Context context) {
@@ -35,7 +35,7 @@ public class InsetsFrameLayout extends FrameLayout implements View.OnApplyWindow
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        pictureInfoLayout = (LinearLayout) findViewById(R.id.pic_info_container);
+        pictureInfoLayout = (ViewGroup) findViewById(R.id.pic_info_container);
     }
 
     @Override

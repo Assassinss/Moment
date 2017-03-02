@@ -18,31 +18,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/pic_info_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/end_alpha_gb"
-        android:orientation="vertical">
-
-        <me.zsj.moment.widget.FontsTextView
-            android:id="@+id/author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="32sp"
-            tools:text="Photo by xxxxxx"/>
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
-            tools:ignore="ContentDescription"/>
+        android:background="@drawable/item_pic_bg">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -53,25 +34,18 @@
             android:elevation="4dp"
             android:minHeight="?attr/actionBarSize">
 
-            <ProgressBar
-                android:id="@+id/loading"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:visibility="gone"
-                tools:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/loading_text"
+            <me.zsj.moment.widget.FontsTextView
+                android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:text="@string/loading_text"/>
+                android:layout_margin="16sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                tools:text="Photo by xxxxxx"/>
 
         </android.support.v7.widget.Toolbar>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </me.zsj.moment.widget.InsetsFrameLayout>

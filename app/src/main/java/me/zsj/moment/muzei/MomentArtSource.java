@@ -75,8 +75,6 @@ public class MomentArtSource extends RemoteMuzeiArtSource {
         Uri imageUri = Uri.parse("http://ssyer.com" + picture.downloadUrl);
 
         publishArtwork(new Artwork.Builder()
-                .title(picture.avatar)
-                .byline("Photo by " + picture.avatar)
                 .imageUri(imageUri)
                 .token(picture.downloadUrl)
                 .build());

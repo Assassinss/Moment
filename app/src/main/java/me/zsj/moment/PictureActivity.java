@@ -12,10 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.RequestManager;
@@ -35,7 +33,6 @@ import me.zsj.moment.model.Picture;
 import me.zsj.moment.rx.RxDownload;
 import me.zsj.moment.rx.RxFile;
 import me.zsj.moment.utils.AnimUtils;
-import me.zsj.moment.utils.CircleTransform;
 import me.zsj.moment.utils.TextureSizeUtils;
 import me.zsj.moment.widget.FontsTextView;
 import me.zsj.moment.widget.FullImageView;
@@ -49,14 +46,12 @@ import static com.bumptech.glide.Glide.with;
  */
 
 public class PictureActivity extends RxAppCompatActivity
-        implements FullImageView.OnSingleTapListener{
+        implements FullImageView.OnSingleTapListener {
 
     private static final String AUTHORITIES = BuildConfig.APPLICATION_ID + ".picture";
     public static final String PICTURE = "picture";
 
-    private ProgressBar loading;
-    private TextView loadingText;
-    private LinearLayout picInfoContainer;
+    private FrameLayout picInfoContainer;
 
     private Picture picture;
 
@@ -71,28 +66,20 @@ public class PictureActivity extends RxAppCompatActivity
 
         picture = getIntent().getParcelableExtra(PICTURE);
 
-        picInfoContainer = (LinearLayout) findViewById(R.id.pic_info_container);
+        picInfoContainer = (FrameLayout) findViewById(R.id.pic_info_container);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(null);
-
-        loading = (ProgressBar) findViewById(R.id.loading);
-        loadingText = (TextView) findViewById(R.id.loading_text);
+        }
 
         FontsTextView author = (FontsTextView) findViewById(R.id.author);
         author.setText(getString(R.string.author, picture.avatar));
 
-        ImageView avatar = (ImageView) findViewById(R.id.avatar);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         FullImageView fullImageView = (FullImageView) findViewById(R.id.full_picture);
         fullImageView.setOnSingleTapListener(this);
-
-        with(this)
-                .load(getString(R.string.picture_host, picture.avatarCover))
-                .transform(new CircleTransform(this))
-                .into(avatar);
 
         progressBar.setVisibility(View.VISIBLE);
         int targetSize = TextureSizeUtils.getMaxTextureSize() / 4;
@@ -164,8 +151,6 @@ public class PictureActivity extends RxAppCompatActivity
                 .compose(ensurePermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .filter(granted -> {
                     if (granted) {
-                        loading.setVisibility(View.VISIBLE);
-                        loadingText.setVisibility(View.VISIBLE);
                         return true;
                     } else {
                         Toasty.info(this, getString(R.string.permission_required),
@@ -181,8 +166,6 @@ public class PictureActivity extends RxAppCompatActivity
                 .doOnNext(file -> MediaScannerConnection.scanFile(getApplicationContext(),
                         new String[]{file.getPath()}, null, null))
                 .subscribe(file -> {
-                    loading.setVisibility(View.GONE);
-                    loadingText.setVisibility(View.GONE);
                     showTips(getString(R.string.save_path_tips, file.getPath()));
                 });
     }
@@ -193,9 +176,7 @@ public class PictureActivity extends RxAppCompatActivity
                 .compose(ensurePermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 .filter(granted -> {
                     if (granted) {
-                        loading.setVisibility(View.VISIBLE);
-                        loadingText.setVisibility(View.VISIBLE);
-                        return true;
+                       return true;
                     } else {
                         Toasty.info(this, getString(R.string.permission_required),
                                 Toast.LENGTH_LONG).show();
@@ -208,10 +189,7 @@ public class PictureActivity extends RxAppCompatActivity
                     final WallpaperManager wm = WallpaperManager.getInstance(this);
                     startActivity(wm.getCropAndSetWallpaperIntent(uri));
                 })
-                .subscribe(uri -> {
-                    loading.setVisibility(View.GONE);
-                    loadingText.setVisibility(View.GONE);
-                });
+                .subscribe();
     }
 
     private Observable<File> save(File directory) {
