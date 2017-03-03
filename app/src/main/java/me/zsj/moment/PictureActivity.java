@@ -100,6 +100,8 @@ public class PictureActivity extends RxAppCompatActivity
                     public boolean onException(Exception e, String model,
                                                Target<GlideDrawable> target,
                                                boolean isFirstResource) {
+                        Toasty.error(PictureActivity.this, e.getMessage(),
+                                Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                         return false;
                     }

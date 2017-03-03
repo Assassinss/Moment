@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
@@ -22,10 +24,11 @@ import me.zsj.moment.model.Picture;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends RxAppCompatActivity {
+public class MainActivity extends RxAppCompatActivity implements View.OnClickListener {
 
     private SwipeRefreshLayout refresh;
     private RecyclerView list;
+    private LinearLayout errorContainer;
 
     private PictureAdapter adapter;
 
@@ -38,6 +41,10 @@ public class MainActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        errorContainer = (LinearLayout) findViewById(R.id.error_container);
+        ImageButton errorIcon = (ImageButton) findViewById(R.id.error_icon);
+        errorIcon.setOnClickListener(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,7 +72,7 @@ public class MainActivity extends RxAppCompatActivity {
                 tv.setTextSize(getResources().getDimensionPixelSize(R.dimen.font_text_size));
                 Typeface titleFont = Typeface.
                         createFromAsset(getAssets(), "fonts/AlexBrush-Regular.ttf");
-                if(tv.getText().equals(toolbar.getTitle())){
+                if (tv.getText().equals(toolbar.getTitle())) {
                     tv.setTypeface(titleFont);
                     break;
                 }
@@ -133,16 +140,31 @@ public class MainActivity extends RxAppCompatActivity {
                 .flatMap(Parser.loadData())
                 .filter(pictures -> pictures != null)
                 .doOnNext(pictures -> this.pictures.addAll(pictures))
+                .doOnNext(pictures -> adapter.setShowFooter(true))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doAfterTerminate(this::setRefreshing)
                 .subscribe(pictures -> {
                     adapter.notifyDataSetChanged();
-                }, Throwable::printStackTrace);
+                }, this::error);
     }
 
     private void setRefreshing() {
         refresh.setRefreshing(false);
+    }
+
+    private void error(Throwable throwable) {
+        throwable.printStackTrace();
+        showErrorView();
+        if (page > 1) page -= 1;
+        adapter.setShowFooter(false);
+        adapter.notifyDataSetChanged();
+    }
+
+    private void showErrorView() {
+        if (pictures.size() == 0) {
+            errorContainer.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -153,7 +175,7 @@ public class MainActivity extends RxAppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.about){
+        if (item.getItemId() == R.id.about) {
             startActivity(new Intent(this, AboutActivity.class));
         }
         return super.onOptionsItemSelected(item);
@@ -170,4 +192,14 @@ public class MainActivity extends RxAppCompatActivity {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
+    @Override
+    public void onClick(View v) {
+        refresh.setRefreshing(true);
+        errorContainer.setVisibility(View.GONE);
+        page = 1;
+        setUrl();
+        loadData(true);
+    }
+
 }

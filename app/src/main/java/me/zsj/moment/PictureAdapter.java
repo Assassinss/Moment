@@ -27,6 +27,7 @@ import static me.zsj.moment.R.id.picture;
 public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Picture> pictures;
+    private boolean showFooter = true;
 
 
     public PictureAdapter(List<Picture> pictures) {
@@ -51,7 +52,11 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         if (getItemViewType(position) == R.layout.item_footer) {
             FooterHolder holder = (FooterHolder) viewHolder;
-            holder.progressBar.setVisibility(View.VISIBLE);
+            if (showFooter) {
+                holder.progressBar.setVisibility(View.VISIBLE);
+            } else {
+                holder.progressBar.setVisibility(View.GONE);
+            }
         } else if (getItemViewType(position) == R.layout.item_picture) {
             Holder holder = (Holder) viewHolder;
             Picture picture = pictures.get(position);
@@ -86,6 +91,10 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             return R.layout.item_picture;
         }
+    }
+
+    public void setShowFooter(boolean showFooter) {
+        this.showFooter = showFooter;
     }
 
     private static class Holder extends RecyclerView.ViewHolder {
