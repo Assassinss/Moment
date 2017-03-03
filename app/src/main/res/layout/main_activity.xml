@@ -42,7 +42,7 @@
             android:paddingBottom="1dp"
             android:paddingTop="1dp"
             app:layoutManager="GridLayoutManager"
-            app:spanCount="2"
+            app:spanCount="@integer/span_count"
             tools:listitem="@layout/item_picture"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>

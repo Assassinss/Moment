@@ -28,6 +28,7 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
     private int screenWidth;
     private int screenHeight;
     private int viewRealWidth;
+    private int viewRealHeight;
 
     private OnSingleTapListener onSingleTapListener;
 
@@ -73,12 +74,20 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
             int width = background.getIntrinsicWidth();
             int height = background.getIntrinsicHeight();
 
-            float ratio = (float) screenHeight / (float) height;
-            viewRealWidth = (int) (width * ratio);
-
-            imageBound.set(0, 0, viewRealWidth, screenHeight);
-            imageMatrix.postScale(ratio, ratio);
-            imageMatrix.postTranslate(-(viewRealWidth - screenWidth) / 2f, 0);
+            //portrait
+            if (height > screenWidth) {
+                float ratio = (float) screenHeight / (float) height;
+                viewRealWidth = (int) (width * ratio);
+                imageBound.set(0, 0, viewRealWidth, screenHeight);
+                imageMatrix.postScale(ratio, ratio);
+                imageMatrix.postTranslate(-(viewRealWidth - screenWidth) / 2f, 0);
+            } else {  //landscape
+                float ratio = (float) screenWidth / (float) width;
+                viewRealHeight = (int) (height * ratio);
+                imageBound.set(0, 0, screenWidth, viewRealHeight);
+                imageMatrix.postScale(ratio, ratio);
+                imageMatrix.postTranslate(0, -(viewRealHeight - screenHeight) / 2f);
+            }
 
             setImageMatrix(imageMatrix);
         }
@@ -92,7 +101,9 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
             public boolean onScroll(MotionEvent e1, MotionEvent e2,
                                     float distanceX, float distanceY) {
                 if (viewRealWidth > screenWidth) {
-                    FullImageView.this.onScroll(distanceX);
+                    FullImageView.this.onScroll(distanceX, distanceY, false);
+                } else {
+                    FullImageView.this.onScroll(distanceX, distanceY, true);
                 }
                 return super.onScroll(e1, e2, distanceX, distanceY);
             }
@@ -127,8 +138,12 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
         return rect;
     }
 
-    private void onScroll(float distanceX) {
-        imageMatrix.postTranslate(-distanceX, 0);
+    private void onScroll(float distanceX, float distanceY, boolean isScrollVertical) {
+        if (isScrollVertical) {
+            imageMatrix.postTranslate(0, -distanceY);
+        } else {
+            imageMatrix.postTranslate(-distanceX, 0);
+        }
         checkMatrixBounds();
         setImageMatrix(imageMatrix);
     }
@@ -148,12 +163,21 @@ public class FullImageView extends ImageView implements View.OnTouchListener {
         float deltaX = 0;
         float deltaY = 0;
         final float viewWidth = getWidth();
+        final float viewHeight = getHeight();
         if (rect.left > 0) {
             deltaX = -rect.left;
         }
         if (rect.right < viewWidth) {
             deltaX = viewWidth - rect.right;
         }
+
+        if (rect.top > 0) {
+            deltaY = -rect.top;
+        }
+        if (rect.bottom < viewHeight) {
+            deltaY = viewHeight - rect.bottom;
+        }
+
         imageMatrix.postTranslate(deltaX, deltaY);
     }
 

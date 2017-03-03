@@ -82,7 +82,7 @@ public class MainActivity extends RxAppCompatActivity implements View.OnClickLis
 
     private void setupRecyclerView() {
         adapter = new PictureAdapter(pictures);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = (GridLayoutManager) list.getLayoutManager();
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -103,8 +103,7 @@ public class MainActivity extends RxAppCompatActivity implements View.OnClickLis
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && pictures.size() > 0 &&
-                        layoutManager.findFirstCompletelyVisibleItemPosition() >=
-                                adapter.getItemCount() - 10) {
+                        layoutManager.findFirstCompletelyVisibleItemPosition() >= 4) {
                     page += 1;
                     setUrl();
                     loadData();
