@@ -39,8 +39,8 @@
             android:layout_height="match_parent"
             android:background="@android:color/black"
             android:clipToPadding="false"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="1dp"
+            android:paddingTop="1dp"
             app:layoutManager="GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_picture"/>
